@@ -57,6 +57,7 @@ jobs:
         run: npm run electron:build
 
       - name: Build and Publish with electron-builder
+        shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
