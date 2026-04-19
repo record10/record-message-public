@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           git clone --depth 1 --branch ${{ inputs.branch }} \
-            https://x-access-token:${{ secrets.PRIVATE_REPO_PAT }}@github.com/Pritraj/record-message.git .
+            https://${{ secrets.PRIVATE_REPO_PAT }}@github.com/Pritraj/record-message.git .
 
       - name: Install Node.js
         uses: actions/setup-node@v4
