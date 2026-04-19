@@ -56,15 +56,20 @@ jobs:
       - name: Build TypeScript Backend
         run: npm run electron:build
 
-      - name: Build and Publish with electron-builder
-        shell: bash
+      - name: Build and Publish (macOS)
+        if: matrix.target == 'mac'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ "${{ matrix.target }}" == "mac" ]; then
-            npx electron-builder --mac --publish always
-          elif [ "${{ matrix.target }}" == "win" ]; then
-            npx electron-builder --win --publish always
-          else
-            npx electron-builder --linux --publish always
-          fi
+        run: npx electron-builder --mac --publish always
+
+      - name: Build and Publish (Windows)
+        if: matrix.target == 'win'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --win --publish always
+
+      - name: Build and Publish (Linux)
+        if: matrix.target == 'linux'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --linux --publish always
