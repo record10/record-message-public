@@ -37,10 +37,11 @@ jobs:
 
     steps:
       - name: Clone private repository
-        shell: bash
-        run: |
-          git clone --depth 1 --branch ${{ inputs.branch }} \
-            https://${{ secrets.PRIVATE_REPO_PAT }}@github.com/Pritraj/record-message.git .
+        uses: actions/checkout@v4
+        with:
+          repository: 'Pritraj/record-message'
+          ref: ${{ inputs.branch }}
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
